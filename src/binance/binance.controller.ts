@@ -13,8 +13,8 @@ constructor (
         return await this.binanceService.findPrice(symbol)
     }
 
-    @Get('/getSymbol')
-    async getSymbol (@Param('symbol') Isymbol:string): Promise<any>{
-        return await this.binanceService.findSymbol(Isymbol);
-    }
+    // @Get('/getSymbol')
+    // async getSymbol (@Param('symbol') Isymbol:string): Promise<any>{
+    //     return await this.binanceService.findSymbol(Isymbol);
+    // }
 }
