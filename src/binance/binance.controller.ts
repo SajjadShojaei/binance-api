@@ -13,7 +13,11 @@ constructor (
         return await this.binanceService.findPrice(symbol)
     }
 
-    // @Get('/getSymbol')
+    @Get('coinsByPair/:pair')
+    async getAllCoinsPairUsdt(@Param('pair') symbol:string):Promise<any>{
+        return await this.binanceService.getAllCoinsPairUsdt(symbol)
+    }
+    // @Get('/:getSymbol')
     // async getSymbol (@Param('symbol') Isymbol:string): Promise<any>{
     //     return await this.binanceService.findSymbol(Isymbol);
     // }
