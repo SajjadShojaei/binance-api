@@ -21,11 +21,13 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@binance/connector": "^1.7.0",
     "@nestjs/common": "^8.1.2",
     "@nestjs/core": "^8.1.2",
     "@nestjs/platform-express": "^8.1.2",
     "@nestjs/swagger": "^5.2.0",
     "axios": "^0.24.0",
+    "binance-connector-node": "^0.5.2",
     "object-array-filter": "^1.0.4",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
