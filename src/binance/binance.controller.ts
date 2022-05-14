@@ -13,6 +13,11 @@ constructor (
         return await this.binanceService.findPrice(symbol)
     }
 
+    @Get('/realtime')
+    async realTimePtice(): Promise<any>{
+        return await this.binanceService.realTimePrice()
+    }
+
     @Get('coinsByPair/:pair')
     async getAllCoinsPairUsdt(@Param('pair') symbol:string):Promise<any>{
         return await this.binanceService.getAllCoinsPairUsdt(symbol)

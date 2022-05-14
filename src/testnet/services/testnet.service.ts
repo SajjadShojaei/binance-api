@@ -6,7 +6,9 @@ import { Model } from "mongoose";
 const { Spot } = require('@binance/connector');
 
 const apiKey = 'RTZtgUc4nAf7wkFJBfOz5dq2Y74ro2N3Ua4YJIGjhbcwxxH4QOfEhP3Si99ntKnb'
+//const apiKey = 'pXM4ResFsfrBeGPDyWo1bSd0yMhEuBhK3ptK0vVsiCIz68Wz13pnGF7GQ22Ugsje'
 const apiSecret = 'vuHGw2enwzuV1twazqUYSV2984m0LQzgZcN7PIq72JtFLJdl1BKNCacoNTJp9u2r'
+//const apiSecret = 'Jd2D5lw0Lq1OJZKuVk0EtGmi6lQVmGwdXihfJzYpRHBYXeKM0FWBcws80FCy86S6'
 const client = new Spot(apiKey, apiSecret, { baseURL: 'https://testnet.binance.vision' })
 
 @Injectable()
@@ -14,19 +16,18 @@ export class TestnetService {
   constructor(@InjectModel(NewOrder.name) private readonly orderModel: Model<NewOrderSchemaDocument>) {}
 
   async getAccountData(){
-    client.account().then(response => client.logger.log(response.data))
-    return
+    return client.account().then(response => client.logger.log(response.data))
   }
 
-  async createNewOrder(symbol:string, type:string, side:string, fills:object, price:number, quantity:number, timeInForce:string):Promise<NewOrderDto>{
-    const order = client.newOrder('BNBUSDT', 'BUY', 'LIMIT', {
-      price: '423.40',
-      quantity: 1,
+  async createNewOrder():Promise<NewOrderDto>{
+    const order = client.newOrderTest('BNBUSDT', 'SELL', 'LIMIT', {
+      price: '402.81',
+      quantity: 10,
       timeInForce: 'GTC'
     }).then(response => client.logger.log(response.data))
       .catch(error => client.logger.error(error))
     const data: NewOrderDto[] = order.data
-    return
+    return 
   }
 
   async orderCount(){

@@ -12,8 +12,8 @@ export class TestnetController {
   }
 
   @Get('order/buy/new')
-  async newOrder(symbol:string, type:string, side:string, fills:object, price:number, quantity:number, timeInForce:string):Promise<any>{
-    return await this.testnetService.createNewOrder(symbol,type,side,fills,price,quantity,timeInForce)
+  async newOrder():Promise<any>{
+    return await this.testnetService.createNewOrder()
   }
 
   @Get('order/count')
