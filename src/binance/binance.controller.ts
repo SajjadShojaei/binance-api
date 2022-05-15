@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Render } from '@nestjs/common';
 import { BinanceService } from './binance.service';
 import { Symbol } from './dto/symbol.interface';
 
@@ -12,6 +12,7 @@ constructor (
     async getPrice(@Param('symbol') symbol:string): Promise<any>{
         return await this.binanceService.findPrice(symbol)
     }
+
 
     @Get('/realtime')
     async realTimePtice(): Promise<any>{

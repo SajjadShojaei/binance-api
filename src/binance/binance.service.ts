@@ -49,38 +49,43 @@ export class BinanceService {
     // }
 
 
+    
     async realTimePrice() {
-        /* Binance */
-        // let ws_binance = new WebSocket('wss://stream.binance.com:9443/ws');
-        // let html_element_binance = document.getElementById('show_price_binance');
+        let ws_binance = new WebSocket('wss://stream.binance.com:9443/ws');
+        let html_element_binance = document.getElementById('show_price_binance');
 
-        // let last_price_binance = null;
+        let last_price_binance = null;
 
-        // ws_binance.onopen = function () {
-        //     ws_binance.send(JSON.stringify({
-        //         'method': 'SUBSCRIBE',
-        //         'params': ['btcusdt@trade'],
-        //         'id': 1
-        //     }))
-        // };
+        ws_binance.onopen = function() {
+            console.log("Binance connected...");
+        };
 
-        // ws_binance.onmessage = function (event) {
-        //     let current_price_binance = event.data;
-        //     let price_binance = parseFloat(current_price_binance.p).toFixed(2);
-        //     html_element_binance.innerText = price_binance;
+        ws_binance.onopen = function () {
+            ws_binance.send(JSON.stringify({
+                'method': 'SUBSCRIBE',
+                'params': ['btcusdt@trade'],
+                'id': 1
+            }))
+        };
 
-        //     if ((price_binance < last_price_binance) && (isNaN(price_binance) == false)) {
-        //         html_element_binance.innerText = '↓' + price_binance;
-        //         html_element_binance.style.color = 'red';
-        //     } else if ((price_binance > last_price_binance) && (isNaN(price_binance) == false)) {
-        //         html_element_binance.innerText = '↑' + price_binance;
-        //         html_element_binance.style.color = 'green';
-        //     } else if ((price_binance == last_price_binance) && (isNaN(price_binance) == false)) {
-        //         html_element_binance.innerText = price_binance;
-        //         html_element_binance.style.color = 'black';
-        //     }
 
-        //     last_price_binance = price_binance;
-        // };
+        ws_binance.onmessage = function (event) {
+            let current_price_binance = JSON.parse(event.data.toString()).data.p;
+            let price_binance = parseFloat(current_price_binance.p).toFixed(2);
+            html_element_binance.innerText = price_binance;
+
+            if ((price_binance < last_price_binance) ) {
+                html_element_binance.innerText = '↓' + price_binance;
+                html_element_binance.style.color = 'red';
+            } else if ((price_binance > last_price_binance) ) {
+                html_element_binance.innerText = '↑' + price_binance;
+                html_element_binance.style.color = 'green';
+            } else if ((price_binance == last_price_binance) ) {
+                html_element_binance.innerText = price_binance;
+                html_element_binance.style.color = 'black';
+            }
+
+            last_price_binance = price_binance;
+        };
     }
 }
